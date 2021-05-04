@@ -1,0 +1,77 @@
+1. Dataset
+
+doc = ["I love data science",
+        "I love coding in python",
+        "I love building NLP tool",
+        "This is a good phone",
+        "This is a good TV",
+        "This is a good laptop"]
+
+print(tokenized_doc)
+
+-----------------------------------------------------------------------------
+
+2.- Tokenización de cada documento, convirtiendo todo a palabras minusculas
+
+[[‘i’, ‘love’, ‘data’, ‘science’],
+ [‘i’, ‘love’, ‘coding’, ‘in’, ‘python’],
+ [‘i’, ‘love’, ‘building’, ‘nlp’, ‘tool’],
+ [‘this’, ‘is’, ‘a’, ‘good’, ‘phone’],
+ [‘this’, ‘is’, ‘a’, ‘good’, ‘tv’],
+ [‘this’, ‘is’, ‘a’, ‘good’, ‘laptop’]]
+
+print(tokenized_doc)
+
+-----------------------------------------------------------------------------
+
+3.- Convertir documento tokenizado en datos etiquetados con formato gensim 
+
+[TaggedDocument(words=[‘i’, ‘love’, ‘data’, ‘science’], tags=[0]),
+ TaggedDocument(words=[‘i’, ‘love’, ‘coding’, ‘in’, ‘python’], tags=[1]),
+ TaggedDocument(words=[‘i’, ‘love’, ‘building’, ‘nlp’, ‘tool’], tags=[2]),
+ TaggedDocument(words=[‘this’, ‘is’, ‘a’, ‘good’, ‘phone’], tags=[3]),
+ TaggedDocument(words=[‘this’, ‘is’, ‘a’, ‘good’, ‘tv’], tags=[4]),
+ TaggedDocument(words=[‘this’, ‘is’, ‘a’, ‘good’, ‘laptop’], tags=[5])]
+
+print(model.wv.vocab)
+
+-----------------------------------------------------------------------------
+
+-----------------------------------------------------------
+Modelo de vector de párrafo de memoria distribuida  (PV-DM)
+-----------------------------------------------------------
+
+4.- Entrena el modelo doc2vec model 
+
+{‘a’: <gensim.models.keyedvectors.Vocab at 0xc45edbb710>,
+ ‘building’: <gensim.models.keyedvectors.Vocab at 0xc45edbb518>,
+ ‘coding’: <gensim.models.keyedvectors.Vocab at 0xc45edbb400>,
+ ‘data’: <gensim.models.keyedvectors.Vocab at 0xc45edbb320>,
+ ‘good’: <gensim.models.keyedvectors.Vocab at 0xc45edbb780>,
+ ‘i’: <gensim.models.keyedvectors.Vocab at 0xc45edbb048>,
+ ‘in’: <gensim.models.keyedvectors.Vocab at 0xc45edbb470>,
+ ‘is’: <gensim.models.keyedvectors.Vocab at 0xc45edbb6d8>,
+ ‘laptop’: <gensim.models.keyedvectors.Vocab at 0xc45edbb8d0>,
+ ‘love’: <gensim.models.keyedvectors.Vocab at 0xc45edbb2b0>,
+ ‘nlp’: <gensim.models.keyedvectors.Vocab at 0xc45edbb588>,
+ ‘phone’: <gensim.models.keyedvectors.Vocab at 0xc45edbb7f0>,
+ ‘python’: <gensim.models.keyedvectors.Vocab at 0xc45edbb4e0>,
+ ‘science’: <gensim.models.keyedvectors.Vocab at 0xc45edbb390>,
+ ‘this’: <gensim.models.keyedvectors.Vocab at 0xc45edbb668>,
+ ‘tool’: <gensim.models.keyedvectors.Vocab at 0xc45edbb5f8>,
+ ‘tv’: <gensim.models.keyedvectors.Vocab at 0xc45edbb860>}
+
+------------------------------------------------------------------------------
+
+test_doc = word_tokenize("That is a good world".lower())
+
+#print(model.docvecs.most_similar(positive=[model.infer_vector(test_doc)],topn=5))
+
+[(5, 0.28079578280448914), (2, 0.16621531546115875), (4, 0.11011763662099838), (1, 0.027669735252857208), (0, -0.2965640127658844)]
+
+-------------------------------------------------------------------------------
+
+Aquí (5, 0.28079578280448914) significa que nuestro test_doc proporcionado es más similar con el documento 5 del conjunto de documentos de entrenamiento con una probabilidad del 28%.
+Nota : el documento 5 de los datos de entrenamiento es: "Esta es una buena computadora portátil"
+
+TaggedDocument(words=[‘this’, ‘is’, ‘a’, ‘good’, ‘laptop’], tags=[5])]
